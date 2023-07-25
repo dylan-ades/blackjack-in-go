@@ -57,7 +57,7 @@ func (d deck) getValue() int {
 		case "Ace":
 			aceCount++
 			value += 11
-		case "Jack", "Queen", "King":
+		case "Jack", "Queen", "King", "10":
 			value += 10
 		default:
 			value += int(card.rank[0] - '0')
@@ -93,17 +93,17 @@ func playerTurn(deck *deck, playerHand *deck) {
 		fmt.Println("\nYour hand:")
 		playerHand.print()
 		fmt.Printf("Total value: %d\n", playerHand.getValue())
-		fmt.Print("Do you want to (h)it or (s)tand? ")
+		fmt.Print("Type 'h' to hit, type 's' to stand: \n")
 		fmt.Scanln(&choice)
 
 		if choice == "h" {
 			hit(deck, playerHand)
 			if playerHand.getValue() > 21 {
-				fmt.Println("Busted! You lose.")
+				fmt.Println("You busted!")
 				os.Exit(0)
 			}
 		} else if choice != "s" {
-			fmt.Println("Invalid choice, try again.")
+			fmt.Println("Not a valid choice.")
 		}
 	}
 }
